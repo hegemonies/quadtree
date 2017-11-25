@@ -2,26 +2,26 @@
 #include <stdlib.h>
 #include <assert.h>
 
-bounds *bounds_init(point *NW, point *SE)
+Bounds *bounds_init(Point *NW, Point *SE)
 {
 	assert(NW);
 	assert(SE);
 
-	bounds *b = malloc(sizeof(bounds));
-	assert(b);
+	Bounds *bounds = malloc(sizeof(bounds));
+	assert(bounds);
 
-	b->nw = malloc(sizeof(point));
-	b->nw->x = NW->x;
-	b->nw->y = NW->y;
+	bounds->nw = malloc(sizeof(Point));
+	bounds->nw->x = NW->x;
+	bounds->nw->y = NW->y;
 
-	b->se = malloc(sizeof(point));
-	b->se->x = SE->x;
-	b->se->y = SE->y;
+	bounds->se = malloc(sizeof(Point));
+	bounds->se->x = SE->x;
+	bounds->se->y = SE->y;
 
-	return b;
+	return bounds;
 }
 
-void bounds_change(bounds *bounds, point *NW, point *SE)
+void bounds_change(Bounds *bounds, Point *NW, Point *SE)
 {
 	assert(bounds);
 	assert(NW);
@@ -34,7 +34,7 @@ void bounds_change(bounds *bounds, point *NW, point *SE)
 	bounds->se->y = SE->y;
 }
 
-void bounds_free(bounds *bounds)
+void bounds_free(Bounds *bounds)
 {
 	assert(bounds);
 

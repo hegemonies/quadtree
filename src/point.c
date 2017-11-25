@@ -2,9 +2,9 @@
 #include <assert.h>
 #include "point.h"
 
-point *point_init(double x, double y)
+Point *point_init(double x, double y)
 {
-	point *p = malloc(sizeof(point));
+	Point *p = malloc(sizeof(Point));
 	assert(p);
 	p->x = x;
 	p->y = y;
@@ -12,7 +12,7 @@ point *point_init(double x, double y)
 	return p;
 }
 
-void point_free(point *p)
+void point_free(Point *p)
 {
 	free(p);
 }

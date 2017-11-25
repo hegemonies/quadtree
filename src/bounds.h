@@ -5,12 +5,12 @@
 
 typedef struct
 {
-	point *nw;
-	point *se;
-} bounds;
+	Point *nw;
+	Point *se;
+} Bounds;
 
-bounds *bounds_init(point */*nw*/, point */*se*/);
-void bounds_change(bounds */*bounds*/, point */*nw*/, point */*se*/);
-void bounds_free(bounds */*bounds*/);
+Bounds *bounds_init(Point */*nw*/, Point */*se*/);
+void bounds_change(Bounds */*bounds*/, Point */*nw*/, Point */*se*/);
+void bounds_free(Bounds */*bounds*/);
 
 #endif

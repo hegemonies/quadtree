@@ -5,9 +5,9 @@ typedef struct
 {
 	double x;
 	double y;
-} point;
+} Point;
 
-point *point_init(double /*x*/, double /*y*/);
-void point_free(point */*point*/);
+Point *point_init(double /*x*/, double /*y*/);
+void point_free(Point */*point*/);
 
 #endif
