@@ -3,13 +3,18 @@
 #include "bounds.h"
 
 typedef struct Node {
-	struct node *nw;
-	struct node *ne;
-	struct node *sw;
-	struct node *se;
+	struct Node *nw;
+	struct Node *ne;
+	struct Node *sw;
+	struct Node *se;
 
 	Bounds *bounds;
 	Point *center;
 } Node;
+
+Node *node_new(void);
+Node *node_with_bounds(double /*NWx*/, double /*NWy*/, double /*SEx*/, double /*SEy*/);
+void node_free(Node */*node*/);
+void quadtree_walk(Node *root);
 
 #endif

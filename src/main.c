@@ -1,6 +1,4 @@
 #include <stdio.h>
-#include "point.h"
-#include "bounds.h"
 #include "node.h"
 
 int main(void)
@@ -32,6 +30,10 @@ int main(void)
 	printf("%f :: %f\n%f :: %f\n", b->nw->x, b->nw->y, b->se->x, b->se->y);
 	
 	bounds_free(b);
+
+	Node *node = node_with_bounds(1.0, 5.0, 5.0, 1.0);
+
+	quadtree_walk(node);
 
 	printf("\x1b[33m GOOD \x1b[0m \n");
 
