@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "node.h"
+#include "quadtree.h"
 
 int main(void)
 {
@@ -32,6 +32,14 @@ int main(void)
 	bounds_free(b);
 
 	Node *node = node_with_bounds(1.0, 5.0, 5.0, 1.0);
+
+	quadtree_walk(node);
+
+	bounds_expand(node->bounds, 0.5, 10.0);
+
+	quadtree_walk(node);
+
+	bounds_expand(node->bounds, 10.0, 0.5);
 
 	quadtree_walk(node);
 
