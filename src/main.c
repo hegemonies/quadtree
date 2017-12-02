@@ -43,6 +43,11 @@ int main(void)
 
 	quadtree_walk(node);
 
+
+	printf("\n");
+	Quadtree *root = quadtree_new(1.0, 10.0, 10.0, 1.0);
+	quadtree_walk(root->root);
+
 	printf("\x1b[33m GOOD \x1b[0m \n");
 
 	return 0;

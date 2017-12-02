@@ -3,8 +3,7 @@
 
 #include "point.h"
 
-typedef struct
-{
+typedef struct {
 	Point *nw;
 	Point *se;
 } Bounds;
