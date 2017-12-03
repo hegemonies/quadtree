@@ -11,6 +11,11 @@ Quadtree *quadtree_new(double NWx, double NWy, double SEx, double SEy)
 	tree->root = node_with_bounds(NWx, NWy, SEx, SEy);
 	assert(tree->root);
 
+	tree->root->nw = NULL;
+	tree->root->ne = NULL;
+	tree->root->sw = NULL;
+	tree->root->se = NULL;
+	tree->root->center = NULL;
 	tree->capacity = 0;
 
 	return tree;
@@ -19,8 +24,8 @@ Quadtree *quadtree_new(double NWx, double NWy, double SEx, double SEy)
 void quadtree_walk(Node *root)
 {
 	if (root->bounds != NULL) {
-		printf("{ nw.x:%f, nw.y:%f, se.x:%f, se.y:%f }: ",
-		 root->bounds->nw->x, root->bounds->nw->y, root->bounds->se->x, root->bounds->se->y);
+		printf("{ nw.x:%f, nw.y:%f, se.x:%f, se.y:%f, center:%f, %f}: ",
+		 root->bounds->nw->x, root->bounds->nw->y, root->bounds->se->x, root->bounds->se->y, root->center->x, root->center->y);
 	}
 	
 	if (root->nw != NULL) {
@@ -50,12 +55,20 @@ int node_contains(Node *node, Point *point)
 
 int node_is_empty(Node *node)
 {
-	return !node 
-		&& !node->nw 
+	return !node->nw 
 		&& !node->ne 
 		&& !node->sw 
 		&& !node->se 
 		&& !node->center;
+}
+
+int node_is_pointer(Node *node)
+{
+	return node->nw != NULL 
+		&& node->ne != NULL 
+		&& node->sw != NULL 
+		&& node->se != NULL 
+		&& node->center != NULL;
 }
 
 Node *get_quadrant(Node *node, Point *point)
@@ -129,20 +142,25 @@ int split_node(Quadtree *tree, Node *node)
 int _insert(Quadtree *tree, Node *node, Point *point, int key)
 {
 	if (node_is_empty(node)) {
+		printf("_insert 1 case go\n");
 		node->center = point;
 		node->key = key;
 		return 1;
 	} else if (node->center) {
 		if (node->center->x == point->x && node->center->y == point->y) {
+			printf("_insert 2 case go\n");
 			node->center = point;
 			node->key = key;
 		} else {
+			printf("_insert 3 case go\n");
 			if (!split_node(tree, node)) {
+				printf("split == 0\n");
 				return 0;
 			}
 			return _insert(tree, node, point, key);
 		}
-	} else if (node->center) {
+	} else if (node_is_pointer(node)) {
+		printf("_insert 4 case go\n");
 		Node *quadrant = get_quadrant(node, point);
 		return !quadrant ? 0 : _insert(tree, quadrant, point, key);
 	}
@@ -153,19 +171,21 @@ int _insert(Quadtree *tree, Node *node, Point *point, int key)
 int quadtree_insert(Quadtree *tree, double x, double y, int key)
 {
 	Point *point = point_init(x, y);
-
 	if (!point) {
+		printf("insert 1 case go\n");
 		return 0;
 	}
 
 	int insert_status = 0;
 
-	if (!node_contains(tree->root, point)) {
+	if (node_contains(tree->root, point)) {
+		printf("insert 2 case go\n");
 		point_free(point);
 		return 0;
 	}
 
 	if (!(insert_status = _insert(tree, tree->root, point, key))) {
+		printf("insert 3 case go\n");
 		point_free(point);
 		return 0;
 	}

@@ -45,7 +45,15 @@ int main(void)
 
 
 	printf("\n");
-	Quadtree *root = quadtree_new(1.0, 10.0, 10.0, 1.0);
+	Quadtree *root = quadtree_new(1.0, 11.0, 11.0, 1.0);
+	quadtree_insert(root, 3.5, 8.5, 5);
+	quadtree_insert(root, 2, 6, 5);
+
+	printf("node->nw == %p\n", node->nw);
+	printf("node->ne == %p\n", node->ne);
+	printf("node->sw == %p\n", node->sw);
+	printf("node->se == %p\n", node->se);
+
 	quadtree_walk(root->root);
 
 	printf("\x1b[33m GOOD \x1b[0m \n");
