@@ -15,7 +15,7 @@ Quadtree *quadtree_new(double NWx, double NWy, double SEx, double SEy)
 	tree->root->ne = NULL;
 	tree->root->sw = NULL;
 	tree->root->se = NULL;
-	tree->root->center = NULL;
+
 	tree->capacity = 0;
 
 	return tree;
@@ -23,7 +23,10 @@ Quadtree *quadtree_new(double NWx, double NWy, double SEx, double SEy)
 
 void quadtree_walk(Node *root)
 {
-	if (root->bounds != NULL) {
+	if (root == NULL) {
+		return;
+	}
+	if (root->bounds != NULL && root->center != NULL) {
 		printf("{ nw.x:%f, nw.y:%f, se.x:%f, se.y:%f, center:%f, %f}: ",
 		 root->bounds->nw->x, root->bounds->nw->y, root->bounds->se->x, root->bounds->se->y, root->center->x, root->center->y);
 	}
@@ -55,10 +58,10 @@ int node_contains(Node *node, Point *point)
 
 int node_is_empty(Node *node)
 {
-	return !node->nw 
-		&& !node->ne 
-		&& !node->sw 
-		&& !node->se 
+	return node->nw == NULL 
+		&& node->ne == NULL 
+		&& node->sw == NULL 
+		&& node->se == NULL 
 		&& !node->center;
 }
 

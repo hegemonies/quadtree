@@ -3,7 +3,7 @@
 
 int main(void)
 {
-	Point *p = point_init(3.0, 2.0);
+	/*Point *p = point_init(3.0, 2.0);
 
 	printf("%f :: %f\n", p->x, p->y);
 
@@ -44,17 +44,38 @@ int main(void)
 	quadtree_walk(node);
 
 
+	printf("\n");*/
+
+	Node *node = node_with_bounds(5.0, 11.0, 11.0, 5.0);
+	printf("node->bounds->nw->x = %f\n", node->bounds->nw->x);
+	printf("node->bounds->nw->y = %f\n", node->bounds->nw->y);
+	printf("node->bounds->se->x = %f\n", node->bounds->se->x);
+	printf("node->bounds->se->y = %f\n", node->bounds->se->y);
+	printf("node->center->x = %f\n", node->center->x);
+	printf("node->center->y = %f\n", node->center->y);
 	printf("\n");
-	Quadtree *root = quadtree_new(1.0, 11.0, 11.0, 1.0);
-	quadtree_insert(root, 3.5, 8.5, 5);
-	quadtree_insert(root, 2, 6, 5);
 
-	printf("node->nw == %p\n", node->nw);
-	printf("node->ne == %p\n", node->ne);
-	printf("node->sw == %p\n", node->sw);
-	printf("node->se == %p\n", node->se);
 
-	quadtree_walk(root->root);
+	Quadtree *tree = quadtree_new(1.0, 11.0, 11.0, 1.0);
+
+	printf("tree->root->nw->x = %f\n", tree->root->bounds->nw->x);
+	printf("tree->root->nw->y = %f\n", tree->root->bounds->nw->y);
+	printf("tree->root->se->x = %f\n", tree->root->bounds->se->x);
+	printf("tree->root->se->y = %f\n", tree->root->bounds->se->y);
+	printf("tree->root->center->x = %f\n", tree->root->center->x);
+	printf("tree->root->center->y = %f\n", tree->root->center->y);
+
+	quadtree_insert(tree, 3.5, 8.5, 5);
+	quadtree_insert(tree, 2, 6, 5);
+
+	printf("root->root->nw == %p\n", tree->root->nw);
+	printf("root->root->ne == %p\n", tree->root->ne);
+	printf("root->root->sw == %p\n", tree->root->sw);
+	printf("root->root->se == %p\n", tree->root->se);
+
+	printf("capacity = %d\n", tree->capacity);
+
+	quadtree_walk(tree->root);
 
 	printf("\x1b[33m GOOD \x1b[0m \n");
 
