@@ -31,7 +31,7 @@ Node *node_with_bounds(double NWx, double NWy, double SEx, double SEy)
 	point_free(nw);
 	point_free(se);
 
-	node->center = point_init((SEx + NWx) / 2, (NWy + SEy) / 2);
+	// node->center = point_init((SEx + NWx) / 2, (NWy + SEy) / 2);
 
 	return node;
 }

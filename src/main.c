@@ -55,18 +55,22 @@ int main(void)
 	// printf("tree->root->center->x = %f\n", tree->root->center->x);
 	// printf("tree->root->center->y = %f\n", tree->root->center->y);
 
-	printf("quadtree_insert (0, 0, 0) = %d\n", quadtree_insert(tree, 0, 0, 0));
-	printf("quadtree_insert (3.5, 8.5, 5) = %d\n", quadtree_insert(tree, 3.5, 8.5, 5));
-	printf("quadtree_insert (2, 6, 6) = %d\n", quadtree_insert(tree, 2, 6, 6));
+	//printf("quadtree_insert (0, 0, 0) = %d\n", quadtree_insert(tree, 0, 0, 0));
+	
+	// printf("node is empty = %d\n", node_is_empty(tree->root));
 
-	// printf("root->root->nw == %p\n", tree->root->nw);
-	// printf("root->root->ne == %p\n", tree->root->ne);
-	// printf("root->root->sw == %p\n", tree->root->sw);
-	// printf("root->root->se == %p\n", tree->root->se);
+	printf("quadtree_insert (8.0, 2.0) = %d\n", quadtree_insert(tree, 8.0, 2.0, 1));
+	printf("quadtree_insert (4.2, 3.0) = %d\n", quadtree_insert(tree, 4.2, 3.0, 2));
+	printf("quadtree_insert (4.2, 3.0) = %d\n", quadtree_insert(tree, 6.0, 6.0, 3));
+	quadtree_walk(tree->root);
+
+	// printf("tree->root->nw == %d\n", tree->root->nw == NULL);
+	// printf("tree->root->ne == %d\n", tree->root->ne == NULL);
+	// printf("tree->root->sw == %d\n", tree->root->sw == NULL);
+	// printf("tree->root->se == %d\n", tree->root->se == NULL);
+	// printf("tree->root->center == %d\n", tree->root->center == NULL);
 
 	printf("capacity = %d\n", tree->capacity);
-
-	quadtree_walk(tree->root);
 
 	printf("\x1b[33m GOOD \x1b[0m \n");
 
