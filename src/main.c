@@ -62,6 +62,7 @@ int main(void)
 	printf("quadtree_insert (8.0, 2.0) = %d\n", quadtree_insert(tree, 8.0, 2.0, 1));
 	printf("quadtree_insert (4.2, 3.0) = %d\n", quadtree_insert(tree, 4.2, 3.0, 2));
 	printf("quadtree_insert (4.2, 3.0) = %d\n", quadtree_insert(tree, 6.0, 6.0, 3));
+	printf("quadtree_insert (8.0, 2.0) = %d\n", quadtree_insert(tree, 8.0, 2.0, 3));
 	quadtree_walk(tree->root);
 
 	// printf("tree->root->nw == %d\n", tree->root->nw == NULL);
