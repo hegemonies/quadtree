@@ -209,3 +209,39 @@ void quadtree_free(Quadtree *tree)
 	node_free(tree->root);
 	free(tree);
 }
+
+int quadtree_search(Quadtree *tree, double x, double y)
+{
+	Point *point = point_init(x, y);
+	assert(point);
+
+	if (!node_contains(tree->root, point)) {
+		return 1;
+	}
+
+	Node *node = tree->root;
+
+	/*while (1) {
+		if (node->nw && node_contains(node->nw, point)) {
+			node = node->nw;
+			continue;
+		} else if (node->ne && node_contains(node->ne, point)) {
+			node = node->ne;
+			continue;
+		} else if (node->sw && node_contains(node->sw, point)) {
+			node = node->sw;
+			continue;
+		} else if (node->se && node_contains(node->se, point)) {
+			node = node->se;
+			continue;
+		}
+
+		break;
+	}*/
+
+	while (!node_is_leaf(node)) {
+		node = get_quadrant(node, point);
+	}
+
+	return node->key;
+}

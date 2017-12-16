@@ -16,7 +16,7 @@ typedef struct Node {
 Node *node_new(void);
 Node *node_with_bounds(double /*NWx*/, double /*NWy*/, double /*SEx*/, double /*SEy*/);
 void node_free(Node */*node*/);
-int node_contains(Node *node, Point *point);
-int node_is_empty(Node *node);
+int node_contains(Node */*node*/, Point */*point*/);
+int node_is_empty(Node */*node*/);
 
 #endif
