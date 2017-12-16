@@ -21,27 +21,33 @@ Quadtree *quadtree_new(double NWx, double NWy, double SEx, double SEy)
 	return tree;
 }
 
-void quadtree_walk(Node *root)
+void quadtree_walk(Node *node)
 {
-	if (root == NULL) {
+	if (node == NULL) {
 		return;
 	}
-	if (root->bounds != NULL && root->center != NULL) {
-		printf("{ nw.x:%f, nw.y:%f, se.x:%f, se.y:%f, center:%f, %f}: ",
-		 root->bounds->nw->x, root->bounds->nw->y, root->bounds->se->x, root->bounds->se->y, root->center->x, root->center->y);
+	if (node->bounds != NULL) {
+		printf("{ nw.x:%.2f, nw.y:%.2f, se.x:%.2f, se.y:%.2f",
+		 node->bounds->nw->x, node->bounds->nw->y, node->bounds->se->x, node->bounds->se->y);
+	}
+
+	if (node->center) {
+		printf(", center:%.2f, %.2f }:", node->center->x, node->center->y);
+	} else {
+		printf(" }:");
 	}
 	
-	if (root->nw != NULL) {
-		quadtree_walk(root->nw);
+	if (node->nw != NULL) {
+		quadtree_walk(node->nw);
 	}
-	if (root->ne != NULL) {
-		quadtree_walk(root->ne);
+	if (node->ne != NULL) {
+		quadtree_walk(node->ne);
 	}
-	if (root->sw != NULL) {
-		quadtree_walk(root->sw);
+	if (node->sw != NULL) {
+		quadtree_walk(node->sw);
 	}
-	if (root->se != NULL) {
-		quadtree_walk(root->se);
+	if (node->se != NULL) {
+		quadtree_walk(node->se);
 	}
 
 	printf("\n");
@@ -50,10 +56,10 @@ void quadtree_walk(Node *root)
 int node_contains(Node *node, Point *point)
 {
 	return node->bounds != NULL 
-		&& node->bounds->nw->x >= point->x 
-		&& node->bounds->nw->y <= point->y 
-		&& node->bounds->se->x <= point->x 
-		&& node->bounds->se->y >= point->y;
+		&& node->bounds->nw->x <= point->x 
+		&& node->bounds->nw->y >= point->y 
+		&& node->bounds->se->x >= point->x 
+		&& node->bounds->se->y <= point->y;
 }
 
 int node_is_empty(Node *node)
@@ -181,7 +187,7 @@ int quadtree_insert(Quadtree *tree, double x, double y, int key)
 
 	int insert_status = 0;
 
-	if (node_contains(tree->root, point)) {
+	if (!node_contains(tree->root, point)) {
 		printf("insert 2 case go\n");
 		point_free(point);
 		return 0;

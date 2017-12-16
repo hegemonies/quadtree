@@ -46,32 +46,23 @@ int main(void)
 
 	printf("\n");*/
 
-	Node *node = node_with_bounds(5.0, 11.0, 11.0, 5.0);
-	printf("node->bounds->nw->x = %f\n", node->bounds->nw->x);
-	printf("node->bounds->nw->y = %f\n", node->bounds->nw->y);
-	printf("node->bounds->se->x = %f\n", node->bounds->se->x);
-	printf("node->bounds->se->y = %f\n", node->bounds->se->y);
-	printf("node->center->x = %f\n", node->center->x);
-	printf("node->center->y = %f\n", node->center->y);
-	printf("\n");
-
-
 	Quadtree *tree = quadtree_new(1.0, 11.0, 11.0, 1.0);
 
-	printf("tree->root->nw->x = %f\n", tree->root->bounds->nw->x);
-	printf("tree->root->nw->y = %f\n", tree->root->bounds->nw->y);
-	printf("tree->root->se->x = %f\n", tree->root->bounds->se->x);
-	printf("tree->root->se->y = %f\n", tree->root->bounds->se->y);
-	printf("tree->root->center->x = %f\n", tree->root->center->x);
-	printf("tree->root->center->y = %f\n", tree->root->center->y);
+	// printf("tree->root->nw->x = %f\n", tree->root->bounds->nw->x);
+	// printf("tree->root->nw->y = %f\n", tree->root->bounds->nw->y);
+	// printf("tree->root->se->x = %f\n", tree->root->bounds->se->x);
+	// printf("tree->root->se->y = %f\n", tree->root->bounds->se->y);
+	// printf("tree->root->center->x = %f\n", tree->root->center->x);
+	// printf("tree->root->center->y = %f\n", tree->root->center->y);
 
-	quadtree_insert(tree, 3.5, 8.5, 5);
-	quadtree_insert(tree, 2, 6, 5);
+	printf("quadtree_insert (0, 0, 0) = %d\n", quadtree_insert(tree, 0, 0, 0));
+	printf("quadtree_insert (3.5, 8.5, 5) = %d\n", quadtree_insert(tree, 3.5, 8.5, 5));
+	printf("quadtree_insert (2, 6, 6) = %d\n", quadtree_insert(tree, 2, 6, 6));
 
-	printf("root->root->nw == %p\n", tree->root->nw);
-	printf("root->root->ne == %p\n", tree->root->ne);
-	printf("root->root->sw == %p\n", tree->root->sw);
-	printf("root->root->se == %p\n", tree->root->se);
+	// printf("root->root->nw == %p\n", tree->root->nw);
+	// printf("root->root->ne == %p\n", tree->root->ne);
+	// printf("root->root->sw == %p\n", tree->root->sw);
+	// printf("root->root->se == %p\n", tree->root->se);
 
 	printf("capacity = %d\n", tree->capacity);
 
