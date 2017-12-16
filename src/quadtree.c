@@ -203,3 +203,9 @@ int quadtree_insert(Quadtree *tree, double x, double y, int key)
 
 	return insert_status;
 }
+
+void quadtree_free(Quadtree *tree)
+{
+	node_free(tree->root);
+	free(tree);
+}

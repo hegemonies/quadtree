@@ -73,6 +73,8 @@ int main(void)
 
 	printf("capacity = %d\n", tree->capacity);
 
+	quadtree_free(tree);
+
 	printf("\x1b[33m GOOD \x1b[0m \n");
 
 	return 0;

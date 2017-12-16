@@ -15,5 +15,6 @@ int split_node(Quadtree *tree, Node *node);
 int _insert(Quadtree *tree, Node *node, Point *point, int key);
 Node *get_quadrant(Node *node, Point *point);
 int node_is_leaf(Node *node);
+void quadtree_free(Quadtree *tree);
 
 #endif
