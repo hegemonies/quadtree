@@ -56,7 +56,8 @@ void quadtree_walk(Node *node)
 
 int node_contains(Node *node, Point *point)
 {
-	return node->bounds != NULL 
+	return node != NULL
+		&& node->bounds != NULL 
 		&& node->bounds->nw->x <= point->x 
 		&& node->bounds->nw->y >= point->y 
 		&& node->bounds->se->x >= point->x 
@@ -83,11 +84,18 @@ int node_is_pointer(Node *node)
 
 int node_is_leaf(Node *node)
 {
+	if (node == NULL) {
+		return 1;
+	}
 	return node->center != NULL;
 }
 
 Node *get_quadrant(Node *node, Point *point)
 {
+	if (node == NULL) {
+		return NULL;
+	}
+
 	if (node_contains(node->nw, point)) {
 		return node->nw;
 	}
@@ -221,26 +229,12 @@ int quadtree_search(Quadtree *tree, double x, double y)
 
 	Node *node = tree->root;
 
-	/*while (1) {
-		if (node->nw && node_contains(node->nw, point)) {
-			node = node->nw;
-			continue;
-		} else if (node->ne && node_contains(node->ne, point)) {
-			node = node->ne;
-			continue;
-		} else if (node->sw && node_contains(node->sw, point)) {
-			node = node->sw;
-			continue;
-		} else if (node->se && node_contains(node->se, point)) {
-			node = node->se;
-			continue;
-		}
-
-		break;
-	}*/
-
 	while (!node_is_leaf(node)) {
 		node = get_quadrant(node, point);
+	}
+
+	if (node == NULL) {
+		return 0;
 	}
 
 	return node->key;
